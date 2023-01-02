@@ -11,12 +11,14 @@ class OfflineImageViewer extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    required this.bytesData,
+    this.bytesData,
+    this.jsonBytes,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final Uint8List bytesData;
+  final Uint8List? bytesData;
+  final dynamic jsonBytes;
 
   @override
   _OfflineImageViewerState createState() => _OfflineImageViewerState();
@@ -35,7 +37,7 @@ class _OfflineImageViewerState extends State<OfflineImageViewer> {
   @override
   Widget build(BuildContext context) {
     return Image.memory(
-      widget.bytesData,
+      widget.bytesData ?? widget.jsonBytes ?? Uint8List(0),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
     );

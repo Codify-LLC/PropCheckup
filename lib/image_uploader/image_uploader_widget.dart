@@ -1,8 +1,8 @@
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -34,24 +34,7 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
           'Create Post',
           style: FlutterFlowTheme.of(context).title2,
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-            child: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30,
-              buttonSize: 48,
-              icon: Icon(
-                Icons.close_rounded,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                size: 30,
-              ),
-              onPressed: () async {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-        ],
+        actions: [],
         centerTitle: false,
         elevation: 0,
       ),
@@ -60,6 +43,17 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+              child: Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: custom_widgets.OfflineImageViewer(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
               child: FFButtonWidget(
