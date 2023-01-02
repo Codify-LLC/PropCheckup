@@ -1,3 +1,4 @@
+import '../all_offline_images/all_offline_images_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -81,8 +82,42 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
                       return;
                     }
                   }
+
+                  FFAppState().update(() {
+                    FFAppState().urlImages = '';
+                  });
                 },
                 text: 'Add New Image Offline',
+                options: FFButtonOptions(
+                  width: 270,
+                  height: 50,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                  elevation: 3,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AllOfflineImagesWidget(),
+                    ),
+                  );
+                },
+                text: 'View All Offline Images',
                 options: FFButtonOptions(
                   width: 270,
                   height: 50,

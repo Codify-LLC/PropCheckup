@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             )
-          : AllOfflineImagesWidget(),
+          : ImageUploaderWidget(),
     );
   }
 }
