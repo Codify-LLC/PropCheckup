@@ -53,7 +53,7 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.5,
                   bytesData: uploadedFileBytes,
-                  jsonBytes: null!,
+                  jsonBytes: null,
                 ),
               ),
             ),

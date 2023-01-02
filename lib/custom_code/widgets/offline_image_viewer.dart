@@ -18,7 +18,7 @@ class OfflineImageViewer extends StatefulWidget {
   final double? width;
   final double? height;
   final Uint8List? bytesData;
-  final dynamic jsonBytes;
+  final dynamic? jsonBytes;
 
   @override
   _OfflineImageViewerState createState() => _OfflineImageViewerState();
