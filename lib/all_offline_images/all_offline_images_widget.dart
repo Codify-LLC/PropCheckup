@@ -76,6 +76,7 @@ class _AllOfflineImagesWidgetState extends State<AllOfflineImagesWidget> {
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.5,
                         bytesData: null,
+                        jsonBytes: imagebyteDataItem,
                       ),
                     ),
                   );

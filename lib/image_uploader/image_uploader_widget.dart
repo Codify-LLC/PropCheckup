@@ -52,6 +52,8 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
                 child: custom_widgets.OfflineImageViewer(
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.5,
+                  bytesData: uploadedFileBytes,
+                  jsonBytes: null!,
                 ),
               ),
             ),
