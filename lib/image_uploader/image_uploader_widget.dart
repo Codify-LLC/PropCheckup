@@ -3,7 +3,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -95,16 +94,6 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
                         ),
                       ),
                     ),
-                    if (uploadedFileBytes != null)
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        child: custom_widgets.OffileImageViewer(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.5,
-                          uploadedFile: uploadedFileBytes,
-                        ),
-                      ),
                   ],
                 ),
               ),

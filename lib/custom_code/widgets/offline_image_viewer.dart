@@ -6,26 +6,29 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-class OffileImageViewer extends StatefulWidget {
-  const OffileImageViewer({
+class OfflineImageViewer extends StatefulWidget {
+  const OfflineImageViewer({
     Key? key,
     this.width,
     this.height,
-    this.uploadedFile,
+    this.bytesData,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final Uint8List? uploadedFile;
+  final Uint8List? bytesData;
 
   @override
-  _OffileImageViewerState createState() => _OffileImageViewerState();
+  _OfflineImageViewerState createState() => _OfflineImageViewerState();
 }
 
-class _OffileImageViewerState extends State<OffileImageViewer> {
+class _OfflineImageViewerState extends State<OfflineImageViewer> {
   @override
   void initState() {
     // TODO: implement initState
+    if (!FFAppState().uploadedImages.contains(widget.uploadedFile ?? []))
+      FFAppState().update(
+          () => FFAppState().uploadedImages.add(widget.uploadedFile ?? []));
     super.initState();
   }
 
