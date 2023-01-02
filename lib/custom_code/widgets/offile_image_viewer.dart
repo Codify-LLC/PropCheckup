@@ -2,14 +2,12 @@
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
-import '../actions/index.dart'; // Imports custom actions
-import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-class offlineImageViewer extends StatefulWidget {
-  const offlineImageViewer({
+class OffileImageViewer extends StatefulWidget {
+  const OffileImageViewer({
     Key? key,
     this.width,
     this.height,
@@ -21,16 +19,13 @@ class offlineImageViewer extends StatefulWidget {
   final Uint8List? uploadedFile;
 
   @override
-  _offlineImageViewerState createState() => _offlineImageViewerState();
+  _OffileImageViewerState createState() => _OffileImageViewerState();
 }
 
-class _offlineImageViewerState extends State<offlineImageViewer> {
+class _OffileImageViewerState extends State<OffileImageViewer> {
   @override
   void initState() {
     // TODO: implement initState
-    if (!FFAppState().uploadedImages.contains(widget.uploadedFile ?? []))
-      FFAppState().update(
-          () => FFAppState().uploadedImages.add(widget.uploadedFile ?? []));
     super.initState();
   }
 
