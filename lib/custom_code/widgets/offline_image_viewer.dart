@@ -37,7 +37,7 @@ class _OfflineImageViewerState extends State<OfflineImageViewer> {
   @override
   Widget build(BuildContext context) {
     return Image.memory(
-      widget.bytesData ?? widget.jsonBytes ?? Uint8List(0),
+      widget.jsonBytes ?? widget.bytesData ?? Uint8List(0),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
     );
