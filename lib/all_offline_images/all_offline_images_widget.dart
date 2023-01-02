@@ -84,7 +84,7 @@ class _AllOfflineImagesWidgetState extends State<AllOfflineImagesWidget> {
                           child: custom_widgets.OfflineImageViewer(
                             width: double.infinity,
                             height: MediaQuery.of(context).size.height * 0.5,
-                            bytesData: uploadedFileBytes,
+                            bytesData: null,
                             jsonBytes: imagebyteDataItem,
                           ),
                         ),
