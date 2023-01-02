@@ -61,44 +61,6 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.94,
-                decoration: BoxDecoration(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.96,
-                        height: 350,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 6,
-                              color: Color(0x3A000000),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Visibility(
-                          visible: uploadedFileBytes == null,
-                          child: Icon(
-                            Icons.add_a_photo,
-                            color: Colors.black,
-                            size: 60,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
               child: FFButtonWidget(
                 onPressed: () async {
