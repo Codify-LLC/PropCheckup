@@ -26,16 +26,16 @@ class _OfflineImageViewerState extends State<OfflineImageViewer> {
   @override
   void initState() {
     // TODO: implement initState
-    if (!FFAppState().uploadedImages.contains(widget.uploadedFile ?? []))
+    if (!FFAppState().uploadedImages.contains(widget.bytesData ?? []))
       FFAppState().update(
-          () => FFAppState().uploadedImages.add(widget.uploadedFile ?? []));
+          () => FFAppState().uploadedImages.add(widget.bytesData ?? []));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Image.memory(
-      widget.uploadedFile ?? Uint8List(0),
+      widget.bytesData ?? Uint8List(0),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
     );
