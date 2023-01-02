@@ -71,7 +71,11 @@ class _CustomerORGWidgetState extends State<CustomerORGWidget>
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              MenuWidget(),
+              if (responsiveVisibility(
+                context: context,
+                phone: false,
+              ))
+                MenuWidget(),
               Container(
                 width: MediaQuery.of(context).size.width * 0.78,
                 height: MediaQuery.of(context).size.height * 1,

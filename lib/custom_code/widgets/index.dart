@@ -1,1 +1,1 @@
-export 'offline_image_viewer.dart' show OfflineImageViewer;
+export 'offile_image_viewer.dart' show OffileImageViewer;

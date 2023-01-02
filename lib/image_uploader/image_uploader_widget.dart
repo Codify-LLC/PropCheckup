@@ -2,6 +2,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,9 @@ class ImageUploaderWidget extends StatefulWidget {
 }
 
 class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
+  bool isMediaUploading = false;
+  Uint8List uploadedFileBytes = Uint8List.fromList([]);
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,38 +56,37 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
         centerTitle: false,
         elevation: 0,
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.94,
-                  decoration: BoxDecoration(),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.96,
-                          height: 350,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 6,
-                                color: Color(0x3A000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+      body: Align(
+        alignment: AlignmentDirectional(0, 0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.94,
+                decoration: BoxDecoration(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.96,
+                        height: 350,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 6,
+                              color: Color(0x3A000000),
+                              offset: Offset(0, 2),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Visibility(
+                          visible: uploadedFileBytes == null,
                           child: Icon(
                             Icons.add_a_photo,
                             color: Colors.black,
@@ -91,46 +94,70 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
                           ),
                         ),
                       ),
+                    ),
+                    if (uploadedFileBytes != null)
                       Container(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.5,
-                        child: custom_widgets.OfflineImageViewer(
+                        child: custom_widgets.OffileImageViewer(
                           width: double.infinity,
                           height: MediaQuery.of(context).size.height * 0.5,
+                          uploadedFile: uploadedFileBytes,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-            child: FFButtonWidget(
-              onPressed: () {
-                print('Button pressed ...');
-              },
-              text: 'Add New Image Offline',
-              options: FFButtonOptions(
-                width: 270,
-                height: 50,
-                color: FlutterFlowTheme.of(context).primaryColor,
-                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                elevation: 3,
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
+                  ],
                 ),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  final selectedMedia = await selectMediaWithSourceBottomSheet(
+                    context: context,
+                    allowPhoto: true,
+                  );
+                  if (selectedMedia != null &&
+                      selectedMedia.every(
+                          (m) => validateFileFormat(m.storagePath, context))) {
+                    setState(() => isMediaUploading = true);
+                    var selectedMediaBytes = <Uint8List>[];
+                    try {
+                      selectedMediaBytes =
+                          selectedMedia.map((m) => m.bytes).toList();
+                    } finally {
+                      isMediaUploading = false;
+                    }
+                    if (selectedMediaBytes.length == selectedMedia.length) {
+                      setState(
+                          () => uploadedFileBytes = selectedMediaBytes.first);
+                    } else {
+                      setState(() {});
+                      return;
+                    }
+                  }
+                },
+                text: 'Add New Image Offline',
+                options: FFButtonOptions(
+                  width: 270,
+                  height: 50,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                  elevation: 3,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
