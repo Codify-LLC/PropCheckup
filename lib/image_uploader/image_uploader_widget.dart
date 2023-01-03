@@ -90,10 +90,6 @@ class _ImageUploaderWidgetState extends State<ImageUploaderWidget> {
                           return;
                         }
                       }
-
-                      FFAppState().update(() {
-                        FFAppState().urlImages = '';
-                      });
                     },
                     text: 'Add New Image Offline',
                     options: FFButtonOptions(

@@ -16,10 +16,6 @@ class FFAppState extends ChangeNotifier {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
-    _RoomLS = prefs.getString('ff_RoomLS') ?? _RoomLS;
-    _FlatLS = prefs.getString('ff_FlatLS') ?? _FlatLS;
-    _ProjectLS = prefs.getString('ff_ProjectLS') ?? _ProjectLS;
-    _UnitID = prefs.getString('ff_UnitID') ?? _UnitID;
     _uploadedImages = prefs.getStringList('ff_uploadedImages')?.map((x) {
           try {
             return jsonDecode(x);
@@ -37,46 +33,6 @@ class FFAppState extends ChangeNotifier {
   }
 
   late SharedPreferences prefs;
-
-  String _InspectionTypeList = 'Home Inspection';
-  String get InspectionTypeList => _InspectionTypeList;
-  set InspectionTypeList(String _value) {
-    _InspectionTypeList = _value;
-  }
-
-  String _RoomLS = '';
-  String get RoomLS => _RoomLS;
-  set RoomLS(String _value) {
-    _RoomLS = _value;
-    prefs.setString('ff_RoomLS', _value);
-  }
-
-  String _FlatLS = '';
-  String get FlatLS => _FlatLS;
-  set FlatLS(String _value) {
-    _FlatLS = _value;
-    prefs.setString('ff_FlatLS', _value);
-  }
-
-  String _ProjectLS = '';
-  String get ProjectLS => _ProjectLS;
-  set ProjectLS(String _value) {
-    _ProjectLS = _value;
-    prefs.setString('ff_ProjectLS', _value);
-  }
-
-  String _UnitID = '';
-  String get UnitID => _UnitID;
-  set UnitID(String _value) {
-    _UnitID = _value;
-    prefs.setString('ff_UnitID', _value);
-  }
-
-  String _urlImages = '';
-  String get urlImages => _urlImages;
-  set urlImages(String _value) {
-    _urlImages = _value;
-  }
 
   List<dynamic> _uploadedImages = [];
   List<dynamic> get uploadedImages => _uploadedImages;
