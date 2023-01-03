@@ -59,6 +59,20 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setStringList('ff_uploadedImages',
         _uploadedImages.map((x) => jsonEncode(x)).toList());
   }
+
+  List<int> _test = [];
+  List<int> get test => _test;
+  set test(List<int> _value) {
+    _test = _value;
+  }
+
+  void addToTest(int _value) {
+    _test.add(_value);
+  }
+
+  void removeFromTest(int _value) {
+    _test.remove(_value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
