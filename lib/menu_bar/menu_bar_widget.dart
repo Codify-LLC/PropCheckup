@@ -17,6 +17,13 @@ class _MenuBarWidgetState extends State<MenuBarWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
   void dispose() {
     _unfocusNode.dispose();
     super.dispose();
@@ -26,16 +33,19 @@ class _MenuBarWidgetState extends State<MenuBarWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      drawer: Container(
-        width: MediaQuery.of(context).size.width * 0.22,
-        child: Drawer(
-          elevation: 16,
-          child: MenuWidget(),
-        ),
-      ),
-    );
+    return Title(
+        title: 'MenuBar',
+        color: FlutterFlowTheme.of(context).primaryColor,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          drawer: Container(
+            width: MediaQuery.of(context).size.width * 0.22,
+            child: Drawer(
+              elevation: 16,
+              child: MenuWidget(),
+            ),
+          ),
+        ));
   }
 }

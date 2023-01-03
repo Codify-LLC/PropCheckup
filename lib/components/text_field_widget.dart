@@ -24,6 +24,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     super.initState();
     reInpectionRemarkController =
         TextEditingController(text: widget.initiaValue);
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

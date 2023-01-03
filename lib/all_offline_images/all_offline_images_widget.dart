@@ -18,6 +18,13 @@ class _AllOfflineImagesWidgetState extends State<AllOfflineImagesWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
   void dispose() {
     _unfocusNode.dispose();
     super.dispose();
@@ -27,74 +34,75 @@ class _AllOfflineImagesWidgetState extends State<AllOfflineImagesWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 30,
-          ),
-          onPressed: () async {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          'Offline Images',
-          style: FlutterFlowTheme.of(context).subtitle1,
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 0,
-      ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: Builder(
-                builder: (context) {
-                  final imagebyteData = FFAppState().uploadedImages.toList();
-                  return SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(imagebyteData.length,
-                          (imagebyteDataIndex) {
-                        final imagebyteDataItem =
-                            imagebyteData[imagebyteDataIndex];
-                        return Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                          child: Container(
-                            width: double.infinity,
-                            height: MediaQuery.of(context).size.height * 0.5,
-                            child: custom_widgets.OfflineImageViewer(
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.5,
-                              bytesData: null,
-                              jsonBytes: imagebyteDataItem,
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  );
-                },
+    return Title(
+        title: 'AllOfflineImages',
+        color: FlutterFlowTheme.of(context).primaryColor,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          appBar: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30,
+              borderWidth: 1,
+              buttonSize: 60,
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 30,
               ),
+              onPressed: () async {
+                context.pop();
+              },
             ),
-          ],
-        ),
-      ),
-    );
+            title: Text(
+              'Offline Images',
+              style: FlutterFlowTheme.of(context).subtitle1,
+            ),
+            actions: [],
+            centerTitle: false,
+            elevation: 0,
+          ),
+          body: GestureDetector(
+            onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: Builder(
+                    builder: (context) {
+                      final imagebyteData =
+                          FFAppState().uploadedImages.toList();
+                      return SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: List.generate(imagebyteData.length,
+                              (imagebyteDataIndex) {
+                            final imagebyteDataItem =
+                                imagebyteData[imagebyteDataIndex];
+                            return Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12, 12, 12, 12),
+                              child: custom_widgets.OfflineImageViewer(
+                                width: double.infinity,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                                bytesData: null,
+                                jsonBytes: imagebyteDataItem,
+                              ),
+                            );
+                          }),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }

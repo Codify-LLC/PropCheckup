@@ -20,6 +20,15 @@ class FFAppState extends ChangeNotifier {
     _FlatLS = prefs.getString('ff_FlatLS') ?? _FlatLS;
     _ProjectLS = prefs.getString('ff_ProjectLS') ?? _ProjectLS;
     _UnitID = prefs.getString('ff_UnitID') ?? _UnitID;
+    _uploadedImages = prefs.getStringList('ff_uploadedImages')?.map((x) {
+          try {
+            return jsonDecode(x);
+          } catch (e) {
+            print("Can't decode persisted json. Error: $e.");
+            return {};
+          }
+        }).toList() ??
+        _uploadedImages;
   }
 
   void update(VoidCallback callback) {
@@ -73,14 +82,20 @@ class FFAppState extends ChangeNotifier {
   List<dynamic> get uploadedImages => _uploadedImages;
   set uploadedImages(List<dynamic> _value) {
     _uploadedImages = _value;
+    prefs.setStringList(
+        'ff_uploadedImages', _value.map((x) => jsonEncode(x)).toList());
   }
 
   void addToUploadedImages(dynamic _value) {
     _uploadedImages.add(_value);
+    prefs.setStringList('ff_uploadedImages',
+        _uploadedImages.map((x) => jsonEncode(x)).toList());
   }
 
   void removeFromUploadedImages(dynamic _value) {
     _uploadedImages.remove(_value);
+    prefs.setStringList('ff_uploadedImages',
+        _uploadedImages.map((x) => jsonEncode(x)).toList());
   }
 }
 

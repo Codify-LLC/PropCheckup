@@ -38,7 +38,7 @@ class _OfflineImageViewerState extends State<OfflineImageViewer> {
         widget.jsonBytes != null
             ? Uint8List.fromList(widget.jsonBytes)
             : widget.bytesData ?? Uint8List(0),
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height * 0.5,
         width: MediaQuery.of(context).size.width,
       ),
     );
