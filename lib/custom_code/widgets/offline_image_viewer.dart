@@ -26,16 +26,10 @@ class OfflineImageViewer extends StatefulWidget {
 
 class _OfflineImageViewerState extends State<OfflineImageViewer> {
   @override
-  void initState() {
-    // TODO: implement initState
+  Widget build(BuildContext context) {
     if (!FFAppState().uploadedImages.contains(widget.bytesData))
       FFAppState()
           .update(() => FFAppState().uploadedImages.add(widget.bytesData));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Image.memory(
       widget.jsonBytes != null
           ? Uint8List.fromList(widget.jsonBytes)
