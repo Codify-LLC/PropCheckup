@@ -28,15 +28,15 @@ class _OfflineImageViewerState extends State<OfflineImageViewer> {
   @override
   Widget build(BuildContext context) {
     if (!FFAppState().uploadedImages.contains(widget.bytesData))
-      FFAppState()
-          .update(() => FFAppState().uploadedImages.add(widget.bytesData));
+      FFAppState().update(
+          () => FFAppState().uploadedImages.add({'img': widget.bytesData}));
     return Visibility(
       visible: (widget.jsonBytes != null &&
-              (widget.jsonBytes as Uint8List).isNotEmpty) ||
+              (widget.jsonBytes['img'] as Uint8List).isNotEmpty) ||
           (widget.bytesData != null && widget.bytesData!.isNotEmpty),
       child: Image.memory(
         widget.jsonBytes != null
-            ? Uint8List.fromList(widget.jsonBytes)
+            ? Uint8List.fromList(widget.jsonBytes['img'])
             : widget.bytesData ?? Uint8List(0),
         height: MediaQuery.of(context).size.height * 0.5,
         width: MediaQuery.of(context).size.width,
