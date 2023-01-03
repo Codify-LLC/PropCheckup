@@ -30,12 +30,16 @@ class _OfflineImageViewerState extends State<OfflineImageViewer> {
     if (!FFAppState().uploadedImages.contains(widget.bytesData))
       FFAppState()
           .update(() => FFAppState().uploadedImages.add(widget.bytesData));
-    return Image.memory(
-      widget.jsonBytes != null
-          ? Uint8List.fromList(widget.jsonBytes)
-          : widget.bytesData ?? Uint8List(0),
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+    return Visibility(
+      visible: widget.jsonBytes != null &&
+          (widget.jsonBytes as Uint8List).isNotEmpty,
+      child: Image.memory(
+        widget.jsonBytes != null
+            ? Uint8List.fromList(widget.jsonBytes)
+            : widget.bytesData ?? Uint8List(0),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+      ),
     );
   }
 }
