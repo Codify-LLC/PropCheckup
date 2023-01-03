@@ -31,8 +31,9 @@ class _OfflineImageViewerState extends State<OfflineImageViewer> {
       FFAppState()
           .update(() => FFAppState().uploadedImages.add(widget.bytesData));
     return Visibility(
-      visible: widget.jsonBytes != null &&
-          (widget.jsonBytes as Uint8List).isNotEmpty,
+      visible: (widget.jsonBytes != null &&
+              (widget.jsonBytes as Uint8List).isNotEmpty) ||
+          widget.bytesData != null,
       child: Image.memory(
         widget.jsonBytes != null
             ? Uint8List.fromList(widget.jsonBytes)
