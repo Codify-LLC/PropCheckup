@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:image_editor_pro/image_editor_pro.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class OfflineImageViewer extends StatefulWidget {
   const OfflineImageViewer({
@@ -35,6 +35,11 @@ class OfflineImageViewer extends StatefulWidget {
 }
 
 class _OfflineImageViewerState extends State<OfflineImageViewer> {
+  void saveImageToGallery(Uint8List imageData) async {
+    // Save the image to the gallery
+    await ImageGallerySaver.saveImage(imageData);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.bytesData != null &&

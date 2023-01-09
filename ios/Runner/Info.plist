@@ -52,6 +52,8 @@
     <string>Please allow gallary access</string>
 	<key>NSCameraUsageDescription</key>
     <string>Please allow camera Access</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>App needs permission  to write images to gallery</string>
 
 
 	<key>UILaunchStoryboardName</key>
