@@ -14,15 +14,13 @@ class AllOfflineImagesWidget extends StatefulWidget {
 }
 
 class _AllOfflineImagesWidgetState extends State<AllOfflineImagesWidget> {
-  LatLng? currentUserLocationValue;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -35,20 +33,6 @@ class _AllOfflineImagesWidgetState extends State<AllOfflineImagesWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
-              color: FlutterFlowTheme.of(context).primaryColor,
-            ),
-          ),
-        ),
-      );
-    }
 
     return Title(
         title: 'AllOfflineImages',
@@ -108,10 +92,6 @@ class _AllOfflineImagesWidgetState extends State<AllOfflineImagesWidget> {
                                     MediaQuery.of(context).size.height * 0.5,
                                 bytesData: null,
                                 jsonBytes: imagebyteDataItem,
-                                dateTime: getCurrentTimestamp.toString(),
-                                location: currentUserLocationValue?.toString(),
-                                galleryImage: false,
-                                cameraImage: false,
                               ),
                             );
                           }),

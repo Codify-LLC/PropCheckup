@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:image_editor_pro/image_editor_pro.dart';
+import 'package:image_editor/image_editor.dart';
 
 class OfflineImageViewer extends StatefulWidget {
   const OfflineImageViewer({
@@ -35,37 +35,42 @@ class OfflineImageViewer extends StatefulWidget {
 }
 
 class _OfflineImageViewerState extends State<OfflineImageViewer> {
+  Future<Uint8List?> addText(Uint8List image) async {
+    const int size = 120;
+    final ImageEditorOption option = ImageEditorOption();
+    final AddTextOption textOption = AddTextOption();
+    textOption.addText(
+      EditorText(
+        offset: const Offset(0, 0),
+        text: widget.dateTime! + " " + widget.location!,
+        fontSizePx: size,
+        textColor: const Color(0xFF995555),
+      ),
+    );
+    option.outputFormat = const OutputFormat.png();
+
+    option.addOption(textOption);
+
+    final Uint8List u = image;
+    final Uint8List? result = await ImageEditor.editImage(
+      image: u,
+      imageEditorOption: option,
+    );
+    print(option.toString());
+
+    if (result == null) {
+      return null;
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Future getimageditor() {
-      final geteditimage =
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return ImageEditorPro(
-          appBarColor: Colors.blue,
-          bottomBarColor: Colors.blue,
-        );
-      })).then((geteditimage) {
-        if (geteditimage != null) {
-          setState(() {
-            _image = geteditimage;
-          });
-        }
-      }).catchError((er) {
-        print(er);
-      });
-    }
-
     if (widget.bytesData != null &&
         widget.bytesData!.isNotEmpty &&
-        !FFAppState().uploadedImages.contains(widget.bytesData)) {
-      if (widget.cameraImage) {
-        FFAppState()
-            .update(() => FFAppState().addToUploadedImages(widget.bytesData));
-      } else {
-        FFAppState()
-            .update(() => FFAppState().addToUploadedImages(widget.bytesData));
-      }
-    }
+        !FFAppState().uploadedImages.contains(widget.bytesData))
+      FFAppState()
+          .update(() => FFAppState().addToUploadedImages(widget.bytesData));
     return Visibility(
       visible: (widget.jsonBytes != null && widget.jsonBytes.isNotEmpty) ||
           (widget.bytesData != null && widget.bytesData!.isNotEmpty),
